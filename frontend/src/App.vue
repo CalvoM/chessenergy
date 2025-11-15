@@ -1,85 +1,44 @@
+<template>
+  <div class="min-h-screen flex items-center justify-center p-6 w-full">
+    <div class="w-full max-w-5xl grid md:grid-cols-2 gap-6">
+      <aside class="flex flex-col gap-4">
+        <section class="bg-[rgba(255,255,255,0.03)] rounded-2xl p-4 text-white/90">
+          <h2 class="text-lg font-semibold">ChessEnergy</h2>
+          <p class="text-sm text-white/60 mt-2">
+            Wave-infused chess variant prototype. 3D board mockup.
+          </p>
+        </section>
+
+        <section class="bg-[rgba(255,255,255,0.03)] rounded-2xl p-4 text-white/90">
+          <h3 class="text-sm font-medium">Tide</h3>
+          <div class="mt-4 h-4 rounded-full bg-gray-800 overflow-hidden">
+            <div
+              class="h-full bg-wave transition-all duration-300"
+              :style="{ width: tidePercent + '%' }"
+            ></div>
+          </div>
+          <p class="text-xs text-white/60 mt-2">Turn: {{ turn }}</p>
+        </section>
+      </aside>
+      <!-- Board takes natural size -->
+      <div class="md:col-span-2 flex items-center justify-center">
+        <Board />
+      </div>
+    </div>
+  </div>
+</template>
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { computed } from 'vue'
+import { useGameStore } from '@/stores/game'
+import Board from '@/components/Board.vue'
+
+const game = useGameStore()
+const tidePercent = computed(() => Math.round(((game.tide + 1) / 2) * 100))
+const turn = computed(() => game.turn)
 </script>
 
-<template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
-</template>
-
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+.bg-wave {
+  background: linear-gradient(90deg, #00e6ff, #00b3cc);
 }
 </style>
