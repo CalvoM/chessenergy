@@ -1,4 +1,4 @@
-name: Run Frontend Tests with Coverage
+name: Run Frontend Tests
 
 on:
   pull_request:
