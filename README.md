@@ -1,3 +1,5 @@
+[![Run Frontend Tests](https://github.com/CalvoM/chessenergy/actions/workflows/frontend-test.yml/badge.svg?branch=main)](https://github.com/CalvoM/chessenergy/actions/workflows/frontend-test.yml)
+
 # ChessEnergy
 
 _A rhythmic twist on the classic game of kings._
