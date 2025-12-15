@@ -1,4 +1,4 @@
-name: Run Tests with Coverage
+name: Run Frontend Tests with Coverage
 
 on:
   pull_request:
@@ -17,21 +17,28 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set up Node.js 24.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.x
+
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 10
 
-      - name: Use Node.js 24.x
-        uses: actions/setup-node@v4
+      - name: Cache pnpm store
+        uses: actions/cache@v3
         with:
-          node-version: 24.x
-          cache: "pnpm"
+          path: ~/.pnpm-store
+          key: pnpm-store-${{ hashFiles('frontend/pnpm-lock.yaml') }}
+          restore-keys: |
+            pnpm-store-
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
-      - name: Run Vitest with coverage
+      - name: Run Vitest 
         run: pnpm run test:unit
         env:
           CI: true

@@ -11,3 +11,4 @@ Each piece radiates _energy waves_ that rise and fall with time.
 Power is never constant — it pulses, interferes, and collapses.  
 You don’t just out-think your opponent; you out-time them.  
 Checkmate isn’t about _position_ anymore — it’s about _rhythm._
+
